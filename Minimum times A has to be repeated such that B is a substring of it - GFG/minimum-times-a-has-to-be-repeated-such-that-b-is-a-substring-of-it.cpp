@@ -9,24 +9,19 @@ using namespace std;
 class Solution {
   public:
     int minRepeats(string A, string B) {
-        // code 
-        string temp = A;
-        int count = 1;
+        // code here
+        string temp=A;
+        int count=1;
         while(A.size()<B.size())
         {
             A+=temp;
             count++;
         }
-        if(A.find(B)!=-1)
-        {
-            return count;
-        }
+        // cout<<A<<endl;
+        if(A.find(B)!=-1) return count;
         A+=temp;
         count++;
-        if(A.find(B)!=-1)
-        {
-            return count;
-        }
+        if(A.find(B)!=-1) return count;
         return -1;
     }
 };
