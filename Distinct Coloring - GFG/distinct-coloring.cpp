@@ -16,27 +16,27 @@ public:
             return 0;
         }
         if(dp[idx][prev]!=-1) return dp[idx][prev];
-        // long long int ans1=INT_MAX;
-        // long long int ans2=INT_MAX;
+        long long int ans1=INT_MAX;
+        long long int ans2=INT_MAX;
         if(prev==0)
         {
-            // ans1=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
-            // ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
-            return dp[idx][prev]=min(g[idx]+mincost(idx+1,1,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
+            ans1=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
+            ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
+            // return dp[idx][prev]=min(g[idx]+mincost(idx+1,1,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
         }
         else if(prev==1)
         {
-            // ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
-            // ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
-            return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
+            ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
+            ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
+            // return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
         }
         else
         {
-            // ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
-            // ans2=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
-            return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),g[idx]+mincost(idx+1,1,n,r,g,b,dp));
+            ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
+            ans2=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
+            // return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),g[idx]+mincost(idx+1,1,n,r,g,b,dp));
         }
-        // return dp[idx][prev]=min(ans1,ans2);
+        return dp[idx][prev]=min(ans1,ans2);
         
     }
     long long int distinctColoring(int N, int r[], int g[], int b[]){
