@@ -22,19 +22,16 @@ public:
         {
             ans1=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
             ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
-            // return dp[idx][prev]=min(g[idx]+mincost(idx+1,1,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
         }
         else if(prev==1)
         {
             ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
             ans2=b[idx]+mincost(idx+1,2,n,r,g,b,dp);
-            // return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),b[idx]+mincost(idx+1,2,n,r,g,b,dp));
         }
-        else
+        else if(prev==2)
         {
             ans1=r[idx]+mincost(idx+1,0,n,r,g,b,dp);
             ans2=g[idx]+mincost(idx+1,1,n,r,g,b,dp);
-            // return dp[idx][prev]=min(r[idx]+mincost(idx+1,0,n,r,g,b,dp),g[idx]+mincost(idx+1,1,n,r,g,b,dp));
         }
         return dp[idx][prev]=min(ans1,ans2);
         
