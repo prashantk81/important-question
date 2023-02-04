@@ -69,7 +69,6 @@ public:
         }
         ptr1=head1;
         ptr2=head2;
-        // cout<<count1<<" "<<count2<<endl;
         if(count1>count2)
         {
             int newcount=count1-count2;
@@ -88,7 +87,6 @@ public:
                 newcount--;
             } 
         }
-        // cout<<ptr1->data<<" "<<ptr2->data<<endl;
         while(ptr1 && ptr2 && ptr1!=ptr2)
         {
             ptr1=ptr1->next;
