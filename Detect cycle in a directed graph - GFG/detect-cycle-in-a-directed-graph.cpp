@@ -6,50 +6,6 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool bfs(int i,vector<int> adj[],vector<int> &vis)
-    {
-        queue<int> qp;
-        qp.push(i);
-        vis[i]=1;
-        while(!qp.empty())
-        {
-            int x=qp.front();
-            qp.pop();
-            // vis[x]=0;
-            for(auto it:adj[x])
-            {
-                if(vis[it]==0)
-                {
-                    vis[it]=1;
-                    qp.push(it);
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     bool dfs(int i,vector<int> adj[],vector<int> &vis,vector<int> &pathvisited)
     {
         vis[i]=1;
