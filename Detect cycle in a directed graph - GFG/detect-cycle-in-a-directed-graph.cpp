@@ -6,39 +6,41 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool dfs(int i,vector<int> adj[],vector<int> &vis,vector<int> &pathvisited)
+    void bfs(queue<int> &qp,vector<int> adj[],vector<int> &ans,vector<int> &indegree)
     {
-        vis[i]=1;
-        pathvisited[i]=1;
-        for(auto it: adj[i])
+        while(!qp.empty())
         {
-            if(vis[it]==0)
+            int x=qp.front();
+            qp.pop();
+            ans.push_back(x);
+            for(auto it:adj[x])
             {
-                int p=dfs(it,adj,vis,pathvisited);
-                if(p) return true;
-            }
-            else
-            {
-                if(pathvisited[it]==1)
-                    return true;
+                indegree[it]--;
+                if(indegree[it]==0)
+                {
+                    qp.push(it);
+                }
             }
         }
-        pathvisited[i]=0;
-        return false;
     }
-    
     bool isCyclic(int V, vector<int> adj[]) {
-        vector<int> vis(V,0);
-        vector<int> pathvisited(V,0);
+        vector<int> indegree(V,0);
         for(int i=0;i<V;i++)
         {
-            if(vis[i]==0)
+            for(auto it:adj[i])
             {
-                bool p=dfs(i,adj,vis,pathvisited);
-                if(p) return true;
+                indegree[it]++;
             }
         }
-        return false;
+        queue<int> qp;
+        for(int i=0;i<V;i++)
+        {
+            if(!indegree[i]) qp.push(i);
+        }
+        vector<int> ans;
+        bfs(qp,adj,ans,indegree);
+        if(ans.size()==V) return false;
+        return true;
     }
 };
 
