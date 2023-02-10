@@ -7,40 +7,44 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
-	void dfs(int idx,stack<int> &st,vector<int> &vis,vector<int> adj[])
+	void bfs(queue<int> qp,vector<int> &indegree,vector<int> &vis,vector<int> &ans,vector<int> adj[])
 	{
-	    vis[idx]=1;
-	    for(auto it:adj[idx])
+	    while(!qp.empty())
 	    {
-	        if(vis[it]==0)
+	        int x=qp.front();
+	        ans.push_back(x);
+	        qp.pop();
+	        for(auto it:adj[x])
 	        {
-	            dfs(it,st,vis,adj);
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            {
+	                qp.push(it);
+	            }
 	        }
 	    }
-	    st.push(idx);
 	}
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    vector<int> vis(V,0);
-	    stack<int> st;
+	    vector<int> indegree(V,0);
 	    for(int i=0;i<V;i++)
 	    {
-	        if(vis[i]==0)
+	        for(auto it:adj[i])
 	        {
-	            dfs(i,st,vis,adj);
+	            indegree[it]++;
 	        }
 	    }
-	    vector<int> ans;
-	    while(!st.empty())
+	    queue<int> qp;
+	    for(int i=0;i<V;i++)
 	    {
-	        ans.push_back(st.top());
-	        st.pop();
+	        if(indegree[i]==0)
+	        {
+	            qp.push(i);
+	        }
 	    }
-	   // for(int i=0;i<ans.size();i++)
-	   // {
-	   //     cout<<ans[i]<<" ";
-	   // }
-	   // cout<<endl;
+	    vector<int> vis(V,0);
+	    vector<int> ans;
+	    bfs(qp,indegree,vis,ans,adj);
 	    return ans;
 	}
 };
